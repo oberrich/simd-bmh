@@ -87,12 +87,6 @@ pub fn parse_pattern(input: TokenStream) -> TokenStream {
         current_pos += 1;
     }
 
-    // Build the shift table: this is the BMH skip table
-    for i in 0..bytes.len() - 1 {
-        let byte = bytes[i] & masks[i];
-        shift_table[byte as usize] = bytes.len() - 1 - i;
-    }
-
     // Return the parsed pattern data as a TokenStream for code generation
     let expanded = quote! {
         Pattern {
@@ -102,7 +96,6 @@ pub fn parse_pattern(input: TokenStream) -> TokenStream {
             best_skip_mask: #best_skip_mask, // Best skip mask
             max_skip: #max_skip, // Maximum skip distance
             best_skip_offset: #best_skip_offset, // Best skip byte position
-            shift_table: [#(#shift_table),*], // Boyer-Moore-Horspool skip table
         }
     };
 

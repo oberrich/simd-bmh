@@ -21,7 +21,6 @@ pub struct Pattern<const N: usize> {
     pub best_skip_mask: u8,
     pub max_skip: usize,
     pub best_skip_offset: usize,
-    pub shift_table: [usize; 256],
 }
 
 impl<const N: usize> Pattern<N> {
@@ -109,7 +108,11 @@ pub fn find_all_matches_sse<const PATTERN_LEN: usize>(text: &[u8], pattern: &Pat
             matches.push(start_pos);
             i += PATTERN_LEN;
         } else {
-            i += pattern.shift_table[text[start_pos + PATTERN_LEN - 1] as usize];
+            let mismatch_byte = text[start_pos + PATTERN_LEN - 1];
+            i += (0..PATTERN_LEN - 1)
+                .rev()
+                .find(|&j| pattern.bytes[j] == mismatch_byte)
+                .map_or(PATTERN_LEN, |j| PATTERN_LEN - 1 - j);
         }
     }
 

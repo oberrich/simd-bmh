@@ -477,7 +477,7 @@ dependencies = [
 
 [[package]]
 name = "simd-bmh"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "criterion",
  "rand",
