@@ -31,6 +31,7 @@ impl<const N: usize> Pattern<N> {
     }
 }
 
+#[inline(always)]
 pub fn find_all_matches_sse<const PATTERN_LEN: usize>(text: &[u8], pattern: &Pattern<PATTERN_LEN>) -> Vec<usize> {
     if PATTERN_LEN > text.len() {
         return Vec::new();
