@@ -1,0 +1,17 @@
+[package]
+name = "simd-bmh-macro"
+version = "0.1.0"
+edition = "2024"
+
+description = "Proc-macro for simd-bmh crate"
+license = "MIT OR Apache-2.0"
+authors = ["oberrich <oberrich@img.ws>"]
+repository = "https://github.com/oberrich/simd-bmh"
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = "2"
+
+[lib]
+proc-macro = true

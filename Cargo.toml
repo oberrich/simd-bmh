@@ -1,0 +1,7 @@
+[workspace]
+resolver = "3"
+
+members = [
+   "crates/simd-bmh",
+   "crates/simd-bmh-macro",
+]
